@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>L'Électron libre — YNSCOACHING.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --noir: #000000;
+  --noir-card: #0E0E0E;
+  --noir-elevated: #141414;
+  --noir-border: #1E1E1E;
+  --orange: #E8850A;
+  --orange-soft: rgba(232,133,10,0.12);
+  --blanc: #FFFFFF;
+  --blanc-muted: #B0B0B0;
+  --blanc-soft: #D4D4D4;
+  --gris: #666666;
+  --rouge: #D44444;
+  --rouge-soft: rgba(212,68,68,0.18);
+  --rouge-faint: rgba(212,68,68,0.08);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  background: var(--noir);
+  color: var(--blanc);
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.page { max-width: 760px; margin: 0 auto; padding: 60px 40px 80px; }
+
+.header {
+  border-bottom: 1px solid var(--noir-border);
+  padding-bottom: 32px;
+  margin-bottom: 48px;
+}
+
+.header-tag {
+  display: inline-block;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 12px;
+  letter-spacing: 4px;
+  color: var(--gris);
+  margin-bottom: 20px;
+}
+
+.letter-circle {
+  width: 80px;
+  height: 80px;
+  background: var(--rouge-soft);
+  border: 2px solid rgba(212,68,68,0.5);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 24px;
+}
+
+.title-block { display: flex; flex-direction: column; gap: 8px; }
+
+.fiche-label {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 14px;
+  letter-spacing: 4px;
+  color: var(--rouge);
+}
+
+.title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(48px, 8vw, 72px);
+  letter-spacing: 2px;
+  line-height: 0.95;
+  color: var(--blanc);
+}
+.title .orange { color: var(--orange); }
+
+.subtitle {
+  font-size: 17px;
+  color: var(--blanc-muted);
+  font-style: italic;
+  font-weight: 300;
+  margin-top: 8px;
+}
+
+.section { margin-bottom: 56px; }
+
+.section-num {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 12px;
+  letter-spacing: 4px;
+  color: var(--orange);
+  margin-bottom: 8px;
+}
+
+.section-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(28px, 4.5vw, 36px);
+  letter-spacing: 1px;
+  line-height: 1.1;
+  margin-bottom: 28px;
+  color: var(--blanc);
+}
+
+.section-title-line {
+  width: 40px;
+  height: 3px;
+  background: var(--orange);
+  margin-bottom: 24px;
+}
+
+.section p {
+  font-size: 16px;
+  color: var(--blanc-soft);
+  margin-bottom: 16px;
+  line-height: 1.75;
+}
+.section p:last-child { margin-bottom: 0; }
+.section p strong { color: var(--blanc); font-weight: 600; }
+
+.bold-lead { font-weight: 600; color: var(--blanc) !important; }
+
+.visages-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.visage {
+  background: var(--rouge-faint);
+  border: 1px solid rgba(212,68,68,0.25);
+  border-radius: 14px;
+  padding: 22px 24px;
+}
+
+.visage-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 16px;
+  letter-spacing: 2px;
+  color: var(--rouge);
+  margin-bottom: 12px;
+  line-height: 1.1;
+}
+
+.visage-text {
+  font-size: 14.5px;
+  color: var(--blanc-soft);
+  line-height: 1.6;
+  margin: 0;
+}
+
+.visages-note {
+  font-size: 14px;
+  color: var(--blanc-muted);
+  font-style: italic;
+  margin-top: 4px;
+}
+
+.item-list { display: flex; flex-direction: column; gap: 16px; }
+
+.item {
+  background: var(--noir-card);
+  border-left: 3px solid var(--orange);
+  border-radius: 0 12px 12px 0;
+  padding: 18px 24px;
+}
+
+.item-lead {
+  font-weight: 600;
+  color: var(--blanc);
+  font-size: 15.5px;
+  margin-bottom: 4px;
+  line-height: 1.45;
+}
+
+.item-text {
+  font-size: 14.5px;
+  color: var(--blanc-soft);
+  line-height: 1.65;
+  margin: 0;
+}
+
+.item.piege { border-left-color: var(--orange); }
+.item.conseil { border-left-color: var(--rouge); }
+.item.signal { border-left-color: #B33939; }
+
+.cta-section {
+  background: var(--noir-card);
+  border: 1px solid var(--noir-border);
+  border-radius: 16px;
+  padding: 32px 32px;
+  margin-top: 24px;
+}
+
+.cta-section p {
+  font-size: 15.5px;
+  color: var(--blanc-soft);
+  line-height: 1.75;
+  margin-bottom: 14px;
+}
+
+.cta-section p:last-of-type { margin-bottom: 24px; }
+.cta-section strong { color: var(--blanc); }
+
+.cta-final-line {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 18px;
+  letter-spacing: 1.5px;
+  color: var(--orange);
+  margin: 24px 0 24px 0 !important;
+  line-height: 1.4;
+}
+
+.cta-buttons { display: flex; gap: 12px; flex-wrap: wrap; }
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 14px 28px;
+  border-radius: 10px;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 16px;
+  letter-spacing: 2px;
+  text-decoration: none;
+  transition: all 0.25s ease;
+  cursor: pointer;
+  border: none;
+}
+
+.btn-primary { background: var(--orange); color: var(--noir); }
+.btn-primary:hover { background: #F59A1F; transform: translateY(-1px); }
+
+.btn-secondary {
+  background: transparent;
+  color: var(--blanc-muted);
+  border: 1px solid var(--noir-border);
+}
+.btn-secondary:hover { color: var(--blanc); border-color: var(--gris); }
+
+.footer {
+  border-top: 1px solid var(--noir-border);
+  margin-top: 64px;
+  padding-top: 32px;
+  text-align: center;
+}
+
+.logo {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 18px;
+  letter-spacing: 4px;
+  color: var(--gris);
+}
+
+.logo .y { font-size: 22px; color: var(--blanc-muted); }
+.logo .dot { color: var(--orange); }
+
+.footer-note {
+  font-size: 11px;
+  color: var(--gris);
+  margin-top: 12px;
+  letter-spacing: 1px;
+}
+
+@media (max-width: 640px) {
+  .page { padding: 40px 24px 60px; }
+  .visages-grid { grid-template-columns: 1fr; gap: 12px; }
+  .header { padding-bottom: 24px; margin-bottom: 36px; }
+  .section { margin-bottom: 44px; }
+  .cta-section { padding: 26px 22px; }
+  .cta-buttons { flex-direction: column; }
+  .btn { width: 100%; }
+}
+
+@media print {
+  body { background: white; color: black; }
+  .page { padding: 24px; max-width: 100%; }
+  .section { page-break-inside: avoid; margin-bottom: 28px; }
+  .visage { page-break-inside: avoid; }
+  .item { page-break-inside: avoid; }
+  .cta-section { background: #FAFAFA; border: 1px solid #CCC; }
+  .section p, .item-text, .visage-text, .cta-section p { color: #222; }
+  .section-title, .item-lead, .cta-section strong { color: #000; }
+  .letter-circle { background: #FFEBEE; border-color: #D44444; }
+  .title, .visages-note { color: #000; }
+  .subtitle { color: #555; }
+}
+</style>
+</head>
+<body>
+
+<div class="page">
+
+  <header class="header">
+    <div class="header-tag">TON ARCHÉTYPE D'ENTREPRENEUR · YNSCOACHING.</div>
+    <div class="letter-circle" aria-label="L'Électron libre">
+      <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <ellipse cx="24" cy="24" rx="21" ry="8.5" transform="rotate(-28 24 24)" stroke="#D44444" stroke-width="2.2"/>
+        <circle cx="24" cy="24" r="4.5" fill="#D44444"/>
+        <circle cx="41" cy="14" r="2.8" fill="#D44444"/>
+        <circle cx="7" cy="34" r="2.8" fill="#D44444"/>
+      </svg>
+    </div>
+    <div class="title-block">
+      <div class="fiche-label">L'ÉLECTRON LIBRE</div>
+      <h1 class="title">TON MODE<br>D'<span class="orange">EMPLOI</span>.</h1>
+      <p class="subtitle">Quand le rythme et l'inspiration mènent ton business.</p>
+    </div>
+  </header>
+
+  <section class="section">
+    <div class="section-num">01</div>
+    <h2 class="section-title">Tu es probablement un entrepreneur qui…</h2>
+    <div class="section-title-line"></div>
+    <p>Ton business tourne <strong>par élans, par à-coups, par alternance</strong>. Tu peux passer d'une semaine où tu produis comme un dingue à une semaine où t'as besoin de lever le pied — et c'est comme ça que tu te recharges, pas en forçant la régularité.</p>
+    <p>Tu ne supportes pas la routine. Refaire le même process, le même type de post, le même rendez-vous calé pareil chaque semaine, ça te vide à une vitesse incroyable. T'as besoin de varier tes offres, tes formats, tes angles.</p>
+    <p>Tu fonctionnes <strong>au quart de tour</strong>. Une idée de contenu, d'offre, de collab te traverse — tu sautes dessus. Cette spontanéité est ton moteur… et parfois ton chaos (quinze trucs lancés, peu finis).</p>
+    <p>Tu cherches à faire autrement que les autres solopreneurs de ta niche. Pas pour provoquer — par nature. Là où tout le monde copie le même tunnel, quelque chose en toi part ailleurs, juste pour voir. T'essaies pas d'être unique : tu l'es, c'est tout.</p>
+  </section>
+
+  <section class="section">
+    <div class="section-num">02</div>
+    <h2 class="section-title">Comment tu fonctionnes vraiment</h2>
+    <div class="section-title-line"></div>
+    <p><span class="bold-lead">Tu lances en testant.</span> Pas en lisant la énième formation « méthode en 7 étapes ». Tu publies, tu proposes, tu vois ce qui prend, tu ajustes en direct. Tu vas plus vite que ceux qui veulent tout planifier avant de bouger — à condition de pas t'éparpiller en route.</p>
+    <p><span class="bold-lead">Tu te ressources dans le changement.</span> Quand t'es vidé, c'est pas une journée canapé qui te relance — c'est un nouveau projet, un nouveau lieu, une nouvelle rencontre. Le neuf te recharge plus vite que le repos immobile.</p>
+    <p><span class="bold-lead">Tu décides à l'instinct.</span> Pas par légèreté — par confiance. Tu sens quand c'est le bon moment pour lancer, et tu y vas. Le problème, c'est quand on te force à délibérer, à valider, à attendre le « bon » plan. Là tu te crispes et tu perds ton élan.</p>
+  </section>
+
+  <section class="section">
+    <div class="section-num">03</div>
+    <h2 class="section-title">Les 4 visages de l'Électron libre</h2>
+    <div class="section-title-line"></div>
+    <p style="margin-bottom: 24px;">Selon ta façon de te ressourcer et de mener ta boîte, tu te reconnais probablement dans un de ces quatre portraits.</p>
+    <div class="visages-grid">
+      <div class="visage">
+        <div class="visage-title">L'Explorateur</div>
+        <p class="visage-text">Curieux insatiable, plein d'offres et d'idées, toujours un projet d'avance. Tu vois des opportunités partout et t'embarques ton audience dans ta vision. Ton risque : ouvrir un nouveau chantier avant d'avoir fini le précédent.</p>
+      </div>
+      <div class="visage">
+        <div class="visage-title">Le Sensible</div>
+        <p class="visage-text">Créatif profond, attaché à tes valeurs. Tu bosses par grands élans suivis de phases de retrait. Il te faut un business qui a du sens pour toi — sinon tu décroches, même quand il marche.</p>
+      </div>
+      <div class="visage">
+        <div class="visage-title">Le Catalyseur</div>
+        <p class="visage-text">Charismatique, fédérateur, dans le lien. Tu vends par l'énergie humaine et tu fais vibrer une communauté. Tu donnes beaucoup… parfois jusqu'à t'oublier et t'épuiser pour tes clients.</p>
+      </div>
+      <div class="visage">
+        <div class="visage-title">Le Visionnaire intuitif</div>
+        <p class="visage-text">Discret mais intense, tu sens les tendances avant les autres. Tu vois où va ton marché. Tu choisis bien à qui tu confies ta vision — ton univers intérieur est plus riche que ce que tu montres.</p>
+      </div>
+    </div>
+    <p class="visages-note">Tu te reconnais dans plusieurs ? C'est normal. Ce sont des portraits indicatifs — la réalité est rarement à 100 %.</p>
+  </section>
+
+  <section class="section">
+    <div class="section-num">04</div>
+    <h2 class="section-title">Tes superpouvoirs en solo</h2>
+    <div class="section-title-line"></div>
+    <div class="item-list">
+      <div class="item">
+        <div class="item-lead">La créativité.</div>
+        <p class="item-text">Tu sors des angles, des offres, des contenus que personne d'autre dans ta niche n'aurait pondus. Ton cerveau associe librement — c'est ton avantage concurrentiel n°1.</p>
+      </div>
+      <div class="item">
+        <div class="item-lead">L'adaptabilité.</div>
+        <p class="item-text">Le marché bouge, un lancement floppe, un algo change — tu rebondis là où d'autres se figent. L'imprévu te stimule au lieu de te paralyser.</p>
+      </div>
+      <div class="item">
+        <div class="item-lead">L'énergie d'élan.</div>
+        <p class="item-text">Quand t'es lancé, t'embarques tout le monde — audience, clients, partenaires. Tu crées une dynamique que les autres viennent suivre.</p>
+      </div>
+      <div class="item">
+        <div class="item-lead">La singularité.</div>
+        <p class="item-text">Tu fais pas comme les autres, et c'est exactement ce qui rend ta marque mémorable. Ce qui sort de toi ne ressemble à personne — ta meilleure barrière à la copie.</p>
+      </div>
+      <div class="item">
+        <div class="item-lead">La lecture des possibles.</div>
+        <p class="item-text">Là où d'autres voient des contraintes (peu de budget, marché saturé), toi tu vois des angles. Tu repères l'opportunité que personne n'a encore prise.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-num">05</div>
+    <h2 class="section-title">Tes pièges typiques de solopreneur</h2>
+    <div class="section-title-line"></div>
+    <div class="item-list">
+      <div class="item piege">
+        <div class="item-lead">T'éparpiller dans 15 offres.</div>
+        <p class="item-text">Chaque nouvelle idée d'offre ou de contenu te paraît plus excitante que celle en cours. Tu accumules les lancements à moitié finis — et ton business avance en zigzag au lieu d'avancer tout court.</p>
+      </div>
+      <div class="item piege">
+        <div class="item-lead">Refuser tout système par principe.</div>
+        <p class="item-text">Tu confonds « liberté » et « absence de structure ». Sauf qu'un business sans process (suivi client, routine de contenu, finances claires) te bouffe ton énergie créative en admin. Un peu de système libère ta créativité — il ne l'enferme pas.</p>
+      </div>
+      <div class="item piege">
+        <div class="item-lead">Te cramer pour tes clients.</div>
+        <p class="item-text">Ton charisme attire, tu donnes à fond… et tu te retrouves à sur-livrer, à dire oui à tout, à t'oublier. Ton énergie est ta ressource n°1 — et tu la brades sans t'en rendre compte.</p>
+      </div>
+      <div class="item piege">
+        <div class="item-lead">Confondre intensité et régularité.</div>
+        <p class="item-text">Tu peux brûler à 200 % sur ton business pendant trois semaines, puis disparaître. Mais une audience et un client ont besoin de constance. L'intensité impressionne ; la régularité construit.</p>
+      </div>
+      <div class="item piege">
+        <div class="item-lead">T'épuiser sans le voir venir.</div>
+        <p class="item-text">Tu vis par à-coups, mais tu ne calcules jamais ton énergie. Un jour tu craques en plein lancement — et tu te demandes pourquoi tu n'as rien senti venir.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-num">06</div>
+    <h2 class="section-title">Ton mode d'emploi pour ton business</h2>
+    <div class="section-title-line"></div>
+    <div class="item-list">
+      <div class="item conseil">
+        <div class="item-lead">Accepte que ton business fonctionne en cycles.</div>
+        <p class="item-text">Phases de production intense, phases de retrait. Cale ton calendrier dessus au lieu de lutter contre. Tes creux préparent tes prochains gros lancements — arrête de culpabiliser dessus.</p>
+      </div>
+      <div class="item conseil">
+        <div class="item-lead">Limite-toi à 1 ou 2 chantiers prioritaires.</div>
+        <p class="item-text">Une offre phare, un canal principal. Note les autres idées dans un carnet « plus tard », mais ne les lance pas tout de suite. Ta discipline à toi : finir avant d'ouvrir.</p>
+      </div>
+      <div class="item conseil">
+        <div class="item-lead">Crée des rituels qui changent souvent.</div>
+        <p class="item-text">Il te faut de la structure, mais pas figée. Change tes formats, tes routines de contenu chaque trimestre. Pour toi, la discipline c'est la variation — pas la répétition.</p>
+      </div>
+      <div class="item conseil">
+        <div class="item-lead">Choisis ton entourage de business avec soin.</div>
+        <p class="item-text">Tu absorbes les énergies. Un associé, un mastermind ou un client qui te freine peut éteindre toute ta créativité. Une personne qui t'inspire peut tout changer. C'est pas du luxe, c'est ton carburant.</p>
+      </div>
+      <div class="item conseil">
+        <div class="item-lead">Écoute tes signaux de fatigue tôt.</div>
+        <p class="item-text">Quand l'envie de créer commence à baisser, c'est déjà tard. Apprends à repérer les petits signaux — lassitude, irritation, procrastination — avant qu'ils ne deviennent un crash en plein run.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-num">07</div>
+    <h2 class="section-title">Tes signaux d'alarme</h2>
+    <div class="section-title-line"></div>
+    <div class="item-list">
+      <div class="item signal">
+        <div class="item-lead">Plus rien ne te stimule.</div>
+        <p class="item-text">Aucune idée, aucune envie de poster, de vendre, de créer. C'est le signe que tu as trop tiré sur la corde. Pause urgente — pas un week-end, une vraie coupure. Sinon, le crash.</p>
+      </div>
+      <div class="item signal">
+        <div class="item-lead">Tu sautes d'un truc à l'autre sans satisfaction.</div>
+        <p class="item-text">Tu lances, tu lâches, tu repars ailleurs. Aucun projet ne tient. Souvent, tu fuis une vraie question — ton positionnement, ton modèle — que tu refuses de regarder en face.</p>
+      </div>
+      <div class="item signal">
+        <div class="item-lead">Ton business ne te ressemble plus.</div>
+        <p class="item-text">Tu as l'impression d'être devenu un solopreneur lambda, fade, sans relief. C'est que tu t'es éteint — souvent en voulant rentrer dans le moule « qui marche ». Reviens à ce qui te rend différent : c'est exactement là qu'est ton argent.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-num">08</div>
+    <h2 class="section-title">Pour aller plus loin</h2>
+    <div class="section-title-line"></div>
+    <div class="cta-section">
+      <p>Ce que tu viens de lire est une <strong>lecture indicative</strong> — basée sur l'archétype qui s'est exprimé le plus chez toi en faisant le test.</p>
+      <p>Si tu t'es reconnu à plusieurs endroits, bon signe. Si certaines choses ne collent pas du tout, c'est intéressant aussi : ta vraie façon de mener ton business combine sûrement plusieurs tendances.</p>
+      <p>Comprendre précisément comment TON business doit tourner — l'ordre exact de tes tendances, ce qui t'active, ce qui te crame, comment vendre et bosser sans jamais te trahir — c'est ce que je fais dans mes accompagnements.</p>
+      <p class="cta-final-line">Et si ça te dit, on en parle ensemble.</p>
+      <div class="cta-buttons">
+        <a class="btn btn-primary" href="https://www.instagram.com/ynscoaching/" target="_blank" rel="noopener">RÉSERVER UN ÉCHANGE →</a>
+        <a class="btn btn-secondary" href="https://www.instagram.com/ynscoaching/" target="_blank" rel="noopener">ME SUIVRE SUR INSTAGRAM</a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="logo"><span class="y">Y</span>NSCOACHING<span class="dot">.</span></div>
+    <div class="footer-note">ARCHÉTYPE ENTREPRENEUR · L'ÉLECTRON LIBRE</div>
+  </footer>
+
+</div>
+
+</body>
+</html>

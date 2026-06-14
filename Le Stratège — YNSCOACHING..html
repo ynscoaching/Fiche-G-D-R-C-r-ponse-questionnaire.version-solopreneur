@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Le Stratège — YNSCOACHING.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --noir: #000000;
+  --noir-card: #0E0E0E;
+  --noir-elevated: #141414;
+  --noir-border: #1E1E1E;
+  --orange: #E8850A;
+  --orange-soft: rgba(232,133,10,0.12);
+  --blanc: #FFFFFF;
+  --blanc-muted: #B0B0B0;
+  --blanc-soft: #D4D4D4;
+  --gris: #666666;
+  --accent: #E8C840;
+  --accent-soft: rgba(232,200,64,0.18);
+  --accent-faint: rgba(232,200,64,0.08);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  background: var(--noir);
+  color: var(--blanc);
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.page { max-width: 760px; margin: 0 auto; padding: 60px 40px 80px; }
+
+.header {
+  border-bottom: 1px solid var(--noir-border);
+  padding-bottom: 32px;
+  margin-bottom: 48px;
+}
+
+.header-tag {
+  display: inline-block;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 12px;
+  letter-spacing: 4px;
+  color: var(--gris);
+  margin-bottom: 20px;
+}
+
+.letter-circle {
+  width: 80px;
+  height: 80px;
+  background: var(--accent-soft);
+  border: 2px solid rgba(232,200,64,0.5);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 24px;
+}
+
+.title-block { display: flex; flex-direction: column; gap: 8px; }
+
+.fiche-label {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 14px;
+  letter-spacing: 4px;
+  color: var(--accent);
+}
+
+.title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(48px, 8vw, 72px);
+  letter-spacing: 2px;
+  line-height: 0.95;
+  color: var(--blanc);
+}
+.title .orange { color: var(--orange); }
+
+.subtitle {
+  font-size: 17px;
+  color: var(--blanc-muted);
+  font-style: italic;
+  font-weight: 300;
+  margin-top: 8px;
+}
+
+.section { margin-bottom: 56px; }
+
+.section-num {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 12px;
+  letter-spacing: 4px;
+  color: var(--orange);
+  margin-bottom: 8px;
+}
+
+.section-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(28px, 4.5vw, 36px);
+  letter-spacing: 1px;
+  line-height: 1.1;
+  margin-bottom: 28px;
+  color: var(--blanc);
+}
+
+.section-title-line {
+  width: 40px;
+  height: 3px;
+  background: var(--orange);
+  margin-bottom: 24px;
+}
+
+.section p {
+  font-size: 16px;
+  color: var(--blanc-soft);
+  margin-bottom: 16px;
+  line-height: 1.75;
+}
+.section p:last-child { margin-bottom: 0; }
+.section p strong { color: var(--blanc); font-weight: 600; }
+
+.bold-lead { font-weight: 600; color: var(--blanc) !important; }
+
+.visages-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.visage {
+  background: var(--accent-faint);
+  border: 1px solid rgba(232,200,64,0.25);
+  border-radius: 14px;
+  padding: 22px 24px;
+}
+
+.visage-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 16px;
+  letter-spacing: 2px;
+  color: var(--accent);
+  margin-bottom: 12px;
+  line-height: 1.1;
+}
+
+.visage-text {
+  font-size: 14.5px;
+  color: var(--blanc-soft);
+  line-height: 1.6;
+  margin: 0;
+}
+
+.visages-note {
+  font-size: 14px;
+  color: var(--blanc-muted);
+  font-style: italic;
+  margin-top: 4px;
+}
+
+.item-list { display: flex; flex-direction: column; gap: 16px; }
+
+.item {
+  background: var(--noir-card);
+  border-left: 3px solid var(--orange);
+  border-radius: 0 12px 12px 0;
+  padding: 18px 24px;
+}
+
+.item-lead {
+  font-weight: 600;
+  color: var(--blanc);
+  font-size: 15.5px;
+  margin-bottom: 4px;
+  line-height: 1.45;
+}
+
+.item-text {
+  font-size: 14.5px;
+  color: var(--blanc-soft);
+  line-height: 1.65;
+  margin: 0;
+}
+
+.item.piege { border-left-color: var(--orange); }
+.item.conseil { border-left-color: var(--accent); }
+.item.signal { border-left-color: #B89A1F; }
+
+.cta-section {
+  background: var(--noir-card);
+  border: 1px solid var(--noir-border);
+  border-radius: 16px;
+  padding: 32px 32px;
+  margin-top: 24px;
+}
+
+.cta-section p {
+  font-size: 15.5px;
+  color: var(--blanc-soft);
+  line-height: 1.75;
+  margin-bottom: 14px;
+}
+
+.cta-section p:last-of-type { margin-bottom: 24px; }
+.cta-section strong { color: var(--blanc); }
+
+.cta-final-line {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 18px;
+  letter-spacing: 1.5px;
+  color: var(--orange);
+  margin: 24px 0 24px 0 !important;
+  line-height: 1.4;
+}
+
+.cta-buttons { display: flex; gap: 12px; flex-wrap: wrap; }
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 14px 28px;
+  border-radius: 10px;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 16px;
+  letter-spacing: 2px;
+  text-decoration: none;
+  transition: all 0.25s ease;
+  cursor: pointer;
+  border: none;
+}
+
+.btn-primary { background: var(--orange); color: var(--noir); }
+.btn-primary:hover { background: #F59A1F; transform: translateY(-1px); }
+
+.btn-secondary {
+  background: transparent;
+  color: var(--blanc-muted);
+  border: 1px solid var(--noir-border);
+}
+.btn-secondary:hover { color: var(--blanc); border-color: var(--gris); }
+
+.footer {
+  border-top: 1px solid var(--noir-border);
+  margin-top: 64px;
+  padding-top: 32px;
+  text-align: center;
+}
+
+.logo {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 18px;
+  letter-spacing: 4px;
+  color: var(--gris);
+}
+
+.logo .y { font-size: 22px; color: var(--blanc-muted); }
+.logo .dot { color: var(--orange); }
+
+.footer-note {
+  font-size: 11px;
+  color: var(--gris);
+  margin-top: 12px;
+  letter-spacing: 1px;
+}
+
+@media (max-width: 640px) {
+  .page { padding: 40px 24px 60px; }
+  .visages-grid { grid-template-columns: 1fr; gap: 12px; }
+  .header { padding-bottom: 24px; margin-bottom: 36px; }
+  .section { margin-bottom: 44px; }
+  .cta-section { padding: 26px 22px; }
+  .cta-buttons { flex-direction: column; }
+  .btn { width: 100%; }
+}
+
+@media print {
+  body { background: white; color: black; }
+  .page { padding: 24px; max-width: 100%; }
+  .section { page-break-inside: avoid; margin-bottom: 28px; }
+  .visage { page-break-inside: avoid; }
+  .item { page-break-inside: avoid; }
+  .cta-section { background: #FAFAFA; border: 1px solid #CCC; }
+  .section p, .item-text, .visage-text, .cta-section p { color: #222; }
+  .section-title, .item-lead, .cta-section strong { color: #000; }
+  .letter-circle { background: #FBF6E0; border-color: #C9A92A; }
+  .title, .visages-note { color: #000; }
+  .subtitle { color: #555; }
+}
+</style>
+</head>
+<body>
+
+<div class="page">
+
+  <header class="header">
+    <div class="header-tag">TON ARCHÉTYPE D'ENTREPRENEUR · YNSCOACHING.</div>
+    <div class="letter-circle" aria-label="Le Stratège">
+      <svg width="46" height="46" viewBox="0 0 46 46" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="#E8C840" stroke-width="2.1">
+        <line x1="13" y1="33" x2="23" y2="12"/>
+        <line x1="23" y1="12" x2="33" y2="33"/>
+        <line x1="13" y1="33" x2="33" y2="33"/>
+        <circle cx="23" cy="12" r="3.6" fill="#E8C840" stroke="none"/>
+        <circle cx="13" cy="33" r="3.6" fill="#E8C840" stroke="none"/>
+        <circle cx="33" cy="33" r="3.6" fill="#E8C840" stroke="none"/>
+      </svg>
+    </div>
+    <div class="title-block">
+      <div class="fiche-label">LE STRATÈGE</div>
+      <h1 class="title">TON MODE<br>D'<span class="orange">EMPLOI</span>.</h1>
+      <p class="subtitle">Quand le sens et l'anticipation mènent ton business.</p>
+    </div>
+  </header>
+
+  <section class="section">
+    <div class="section-num">01</div>
+    <h2 class="section-title">Tu es probablement un entrepreneur qui…</h2>
+    <div class="section-title-line"></div>
+    <p>Tu mènes ton business <strong>au sens avant l'action</strong>. Avant de te lancer dans une offre ou une niche, t'as besoin de comprendre pourquoi, comment, et où ça mène. Sans cette vision, tu décroches.</p>
+    <p>Tu vois loin. Là où les autres solopreneurs pensent au prochain lancement, toi tu penses à ton positionnement dans trois ans. Cette projection, c'est ta nature, pas un effort.</p>
+    <p>Tu fais des liens que personne ne fait — entre un truc lu, une conversation, une tendance. Tu repères le schéma caché derrière ton marché avant les autres.</p>
+    <p>Tu refuses d'appliquer une « méthode qui marche » juste parce qu'un gourou le dit. Il faut que tu comprennes le mécanisme. Et tant que ce n'est pas le cas, tu peux rester bloqué des semaines — pas par paresse, par exigence intérieure.</p>
+  </section>
+
+  <section class="section">
+    <div class="section-num">02</div>
+    <h2 class="section-title">Comment tu fonctionnes vraiment</h2>
+    <div class="section-title-line"></div>
+    <p><span class="bold-lead">Tu apprends par la compréhension globale.</span> Pas par les recettes isolées. Tu veux saisir le système entier — et ensuite, les détails s'organisent tout seuls. Quand tu maîtrises un sujet (copywriting, acquisition…), c'est à un niveau que la plupart n'atteignent jamais.</p>
+    <p><span class="bold-lead">Tu te recharges dans la profondeur et le calme.</span> Pas dans l'agitation des réseaux. Quand t'es vidé, ce qui te relance c'est te retrouver seul avec tes idées : lire, écrire, penser, observer. Le silence mental est ton vrai luxe.</p>
+    <p><span class="bold-lead">Tu décides en projetant.</span> Tu visualises où ça mène, tu anticipes les conséquences, tu vois les obstacles avant qu'ils arrivent. Pas par méfiance — par sens stratégique. Quand tu lances un truc, c'est rarement à la légère.</p>
+  </section>
+
+  <section class="section">
+    <div class="section-num">03</div>
+    <h2 class="section-title">Les 4 visages du Stratège</h2>
+    <div class="section-title-line"></div>
+    <p style="margin-bottom: 24px;">Selon ta façon de te ressourcer et de mener ta boîte, tu te reconnais probablement dans un de ces quatre portraits.</p>
+    <div class="visages-grid">
+      <div class="visage">
+        <div class="visage-title">L'Innovateur</div>
+        <p class="visage-text">Curieux, débatteur, dans les idées qui s'affrontent. Tu adores challenger les évidences de ta niche, tester des angles que personne n'ose. Tu vis pour ce qui fait penser.</p>
+      </div>
+      <div class="visage">
+        <div class="visage-title">L'Analyste</div>
+        <p class="visage-text">Profond, méthodique, dans la pensée pure. Tu veux comprendre ton marché jusqu'au mécanisme intime. Tu détestes les approximations et les « recettes magiques ».</p>
+      </div>
+      <div class="visage">
+        <div class="visage-title">Le Pilote</div>
+        <p class="visage-text">Décisif, ambitieux, dans le pilotage long terme. Tu construis des plans, tu vois les enjeux, tu mènes. T'as pas peur des décisions difficiles : pivoter, augmenter tes prix, refuser un client.</p>
+      </div>
+      <div class="visage">
+        <div class="visage-title">L'Architecte</div>
+        <p class="visage-text">Discret, intense, dans la vision systémique. Tu vois où va ton marché avant tout le monde, et tu bâtis silencieusement les systèmes qui vont te démarquer.</p>
+      </div>
+    </div>
+    <p class="visages-note">Tu te reconnais dans plusieurs ? C'est normal. Ce sont des portraits indicatifs — la réalité est rarement à 100 %.</p>
+  </section>
+
+  <section class="section">
+    <div class="section-num">04</div>
+    <h2 class="section-title">Tes superpouvoirs en solo</h2>
+    <div class="section-title-line"></div>
+    <div class="item-list">
+      <div class="item">
+        <div class="item-lead">L'anticipation.</div>
+        <p class="item-text">Tu vois les conséquences à trois coups d'avance. Dans un business solo où une mauvaise décision coûte cher, c'est de l'or.</p>
+      </div>
+      <div class="item">
+        <div class="item-lead">La vision systémique.</div>
+        <p class="item-text">Tu comprends comment tout s'articule — offre, acquisition, audience, livraison. Tu vois le tableau d'ensemble pendant que les autres bricolent pixel par pixel.</p>
+      </div>
+      <div class="item">
+        <div class="item-lead">La maîtrise en profondeur.</div>
+        <p class="item-text">Quand tu décides d'apprendre un levier, tu vas plus loin que la moyenne. Tu deviens une référence sur ton sujet, naturellement — et ça attire les clients.</p>
+      </div>
+      <div class="item">
+        <div class="item-lead">L'autonomie intellectuelle.</div>
+        <p class="item-text">Tu penses par toi-même. Tu ne suis pas le troupeau des « business models à la mode » — tu construis ta propre stratégie. Rare, et différenciant.</p>
+      </div>
+      <div class="item">
+        <div class="item-lead">La capacité de direction.</div>
+        <p class="item-text">Quand tu vois clair, t'embarques ton audience et tes partenaires dans une direction qu'ils ne voyaient pas. Tu donnes le cap.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-num">05</div>
+    <h2 class="section-title">Tes pièges typiques de solopreneur</h2>
+    <div class="section-title-line"></div>
+    <div class="item-list">
+      <div class="item piege">
+        <div class="item-lead">Rester dans la tête sans jamais lancer.</div>
+        <p class="item-text">Tu analyses, tu projettes, tu peaufines ta stratégie — et tu ne sors rien. Comprendre n'est pas vendre. À un moment, il faut lancer, même imparfait. Le marché t'apprendra plus qu'un mois de réflexion.</p>
+      </div>
+      <div class="item piege">
+        <div class="item-lead">Exiger de ton audience une vision qu'elle n'a pas.</div>
+        <p class="item-text">Tu t'agaces que les gens ne captent pas ce qui te paraît évident. Mais ce qui est limpide pour toi est invisible pour eux. C'est ton angle mort — et ça plombe ta communication.</p>
+      </div>
+      <div class="item piege">
+        <div class="item-lead">Sous-estimer le concret et l'humain.</div>
+        <p class="item-text">Tu vis dans ta tête au point d'oublier que vendre, c'est du relationnel, du terrain, du ressenti. Tu peux mépriser le « marketing émotionnel » qui pourtant fait acheter les gens.</p>
+      </div>
+      <div class="item piege">
+        <div class="item-lead">Vouloir tout maîtriser avant de te lancer.</div>
+        <p class="item-text">Tu attends d'avoir compris à 100 % — sauf qu'en business on n'a jamais toutes les infos. Cette exigence te paralyse plus qu'elle ne te protège. Pendant ce temps, un moins bon que toi a déjà lancé.</p>
+      </div>
+      <div class="item piege">
+        <div class="item-lead">Te couper des autres.</div>
+        <p class="item-text">Tu te ressources seul, donc tu finis seul à porter ta boîte. Ton autonomie glisse vers l'isolement — et tes meilleures idées ont besoin d'être confrontées pour devenir des offres.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-num">06</div>
+    <h2 class="section-title">Ton mode d'emploi pour ton business</h2>
+    <div class="section-title-line"></div>
+    <div class="item-list">
+      <div class="item conseil">
+        <div class="item-lead">Lance à 70 % de compréhension.</div>
+        <p class="item-text">Vise 70 %, puis lance. Tu apprendras les 30 % restants dans l'action et les retours clients. La stratégie parfaite sur papier est une illusion.</p>
+      </div>
+      <div class="item conseil">
+        <div class="item-lead">Reviens régulièrement dans ton corps.</div>
+        <p class="item-text">Bouge, marche, respire. Pas pour la perf — pour ne pas te déconnecter du réel. Un stratège déconnecté de son terrain prend des décisions hors-sol.</p>
+      </div>
+      <div class="item conseil">
+        <div class="item-lead">Traduis ta vision pour ton audience.</div>
+        <p class="item-text">Ce qui est clair dans ta tête est obscur pour ton marché. Apprends à simplifier, imager, donner des exemples concrets. Sinon ta vision géniale reste invendable.</p>
+      </div>
+      <div class="item conseil">
+        <div class="item-lead">Choisis quelques relations vraies entre pairs.</div>
+        <p class="item-text">T'as pas besoin de 50 contacts — mais de deux ou trois entrepreneurs avec qui penser tout haut. Un bon mastermind vaut dix formations.</p>
+      </div>
+      <div class="item conseil">
+        <div class="item-lead">Accepte que tout n'a pas à avoir du sens.</div>
+        <p class="item-text">Certaines choses sont juste agréables, gratuites. Apprends à les vivre sans chercher à les rentabiliser. C'est ton repos — et un cerveau reposé décide mieux.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-num">07</div>
+    <h2 class="section-title">Tes signaux d'alarme</h2>
+    <div class="section-title-line"></div>
+    <div class="item-list">
+      <div class="item signal">
+        <div class="item-lead">Tu rumines sans avancer.</div>
+        <p class="item-text">Tu tournes en boucle sur ta stratégie, ton positionnement, sans rien lancer. Ton cerveau tourne à vide, il manque de matière concrète. Lance un truc, n'importe quoi, pour réamorcer.</p>
+      </div>
+      <div class="item signal">
+        <div class="item-lead">Tu deviens cynique ou méprisant.</div>
+        <p class="item-text">Tout te paraît stupide, superficiel — les autres créateurs, les tendances, ton audience. C'est le signe que tu t'es coupé du monde, pas que le monde est devenu vide.</p>
+      </div>
+      <div class="item signal">
+        <div class="item-lead">Tu te sens irréel, dissocié.</div>
+        <p class="item-text">Tu vis tellement dans la tête que ta propre boîte te paraît abstraite, lointaine. Tu observes ton business comme un spectateur. Reviens au sol : un appel client, une vente, du concret.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-num">08</div>
+    <h2 class="section-title">Pour aller plus loin</h2>
+    <div class="section-title-line"></div>
+    <div class="cta-section">
+      <p>Ce que tu viens de lire est une <strong>lecture indicative</strong> — basée sur l'archétype qui s'est exprimé le plus chez toi en faisant le test.</p>
+      <p>Si tu t'es reconnu à plusieurs endroits, bon signe. Si certaines choses ne collent pas du tout, c'est intéressant aussi : ta vraie façon de mener ton business combine sûrement plusieurs tendances.</p>
+      <p>Comprendre précisément comment TON business doit tourner — l'ordre exact de tes tendances, ce qui t'active, ce qui te crame, comment vendre et bosser sans jamais te trahir — c'est ce que je fais dans mes accompagnements.</p>
+      <p class="cta-final-line">Et si ça te dit, on en parle ensemble.</p>
+      <div class="cta-buttons">
+        <a class="btn btn-primary" href="https://www.instagram.com/ynscoaching/" target="_blank" rel="noopener">RÉSERVER UN ÉCHANGE →</a>
+        <a class="btn btn-secondary" href="https://www.instagram.com/ynscoaching/" target="_blank" rel="noopener">ME SUIVRE SUR INSTAGRAM</a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="logo"><span class="y">Y</span>NSCOACHING<span class="dot">.</span></div>
+    <div class="footer-note">ARCHÉTYPE ENTREPRENEUR · LE STRATÈGE</div>
+  </footer>
+
+</div>
+
+</body>
+</html>

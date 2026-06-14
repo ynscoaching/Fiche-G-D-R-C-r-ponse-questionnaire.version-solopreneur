@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>L'Opérateur — YNSCOACHING.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --noir: #000000;
+  --noir-card: #0E0E0E;
+  --noir-elevated: #141414;
+  --noir-border: #1E1E1E;
+  --orange: #E8850A;
+  --orange-soft: rgba(232,133,10,0.12);
+  --blanc: #FFFFFF;
+  --blanc-muted: #B0B0B0;
+  --blanc-soft: #D4D4D4;
+  --gris: #666666;
+  --accent: #5677A8;
+  --accent-soft: rgba(86,119,168,0.18);
+  --accent-faint: rgba(86,119,168,0.08);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  background: var(--noir);
+  color: var(--blanc);
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.page { max-width: 760px; margin: 0 auto; padding: 60px 40px 80px; }
+
+.header {
+  border-bottom: 1px solid var(--noir-border);
+  padding-bottom: 32px;
+  margin-bottom: 48px;
+}
+
+.header-tag {
+  display: inline-block;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 12px;
+  letter-spacing: 4px;
+  color: var(--gris);
+  margin-bottom: 20px;
+}
+
+.letter-circle {
+  width: 80px;
+  height: 80px;
+  background: var(--accent-soft);
+  border: 2px solid rgba(86,119,168,0.5);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 24px;
+}
+
+.title-block { display: flex; flex-direction: column; gap: 8px; }
+
+.fiche-label {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 14px;
+  letter-spacing: 4px;
+  color: var(--accent);
+}
+
+.title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(48px, 8vw, 72px);
+  letter-spacing: 2px;
+  line-height: 0.95;
+  color: var(--blanc);
+}
+.title .orange { color: var(--orange); }
+
+.subtitle {
+  font-size: 17px;
+  color: var(--blanc-muted);
+  font-style: italic;
+  font-weight: 300;
+  margin-top: 8px;
+}
+
+.section { margin-bottom: 56px; }
+
+.section-num {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 12px;
+  letter-spacing: 4px;
+  color: var(--orange);
+  margin-bottom: 8px;
+}
+
+.section-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(28px, 4.5vw, 36px);
+  letter-spacing: 1px;
+  line-height: 1.1;
+  margin-bottom: 28px;
+  color: var(--blanc);
+}
+
+.section-title-line {
+  width: 40px;
+  height: 3px;
+  background: var(--orange);
+  margin-bottom: 24px;
+}
+
+.section p {
+  font-size: 16px;
+  color: var(--blanc-soft);
+  margin-bottom: 16px;
+  line-height: 1.75;
+}
+.section p:last-child { margin-bottom: 0; }
+.section p strong { color: var(--blanc); font-weight: 600; }
+
+.bold-lead { font-weight: 600; color: var(--blanc) !important; }
+
+.visages-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.visage {
+  background: var(--accent-faint);
+  border: 1px solid rgba(86,119,168,0.25);
+  border-radius: 14px;
+  padding: 22px 24px;
+}
+
+.visage-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 16px;
+  letter-spacing: 2px;
+  color: var(--accent);
+  margin-bottom: 12px;
+  line-height: 1.1;
+}
+
+.visage-text {
+  font-size: 14.5px;
+  color: var(--blanc-soft);
+  line-height: 1.6;
+  margin: 0;
+}
+
+.visages-note {
+  font-size: 14px;
+  color: var(--blanc-muted);
+  font-style: italic;
+  margin-top: 4px;
+}
+
+.item-list { display: flex; flex-direction: column; gap: 16px; }
+
+.item {
+  background: var(--noir-card);
+  border-left: 3px solid var(--orange);
+  border-radius: 0 12px 12px 0;
+  padding: 18px 24px;
+}
+
+.item-lead {
+  font-weight: 600;
+  color: var(--blanc);
+  font-size: 15.5px;
+  margin-bottom: 4px;
+  line-height: 1.45;
+}
+
+.item-text {
+  font-size: 14.5px;
+  color: var(--blanc-soft);
+  line-height: 1.65;
+  margin: 0;
+}
+
+.item.piege { border-left-color: var(--orange); }
+.item.conseil { border-left-color: var(--accent); }
+.item.signal { border-left-color: #3E5A86; }
+
+.cta-section {
+  background: var(--noir-card);
+  border: 1px solid var(--noir-border);
+  border-radius: 16px;
+  padding: 32px 32px;
+  margin-top: 24px;
+}
+
+.cta-section p {
+  font-size: 15.5px;
+  color: var(--blanc-soft);
+  line-height: 1.75;
+  margin-bottom: 14px;
+}
+
+.cta-section p:last-of-type { margin-bottom: 24px; }
+.cta-section strong { color: var(--blanc); }
+
+.cta-final-line {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 18px;
+  letter-spacing: 1.5px;
+  color: var(--orange);
+  margin: 24px 0 24px 0 !important;
+  line-height: 1.4;
+}
+
+.cta-buttons { display: flex; gap: 12px; flex-wrap: wrap; }
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 14px 28px;
+  border-radius: 10px;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 16px;
+  letter-spacing: 2px;
+  text-decoration: none;
+  transition: all 0.25s ease;
+  cursor: pointer;
+  border: none;
+}
+
+.btn-primary { background: var(--orange); color: var(--noir); }
+.btn-primary:hover { background: #F59A1F; transform: translateY(-1px); }
+
+.btn-secondary {
+  background: transparent;
+  color: var(--blanc-muted);
+  border: 1px solid var(--noir-border);
+}
+.btn-secondary:hover { color: var(--blanc); border-color: var(--gris); }
+
+.footer {
+  border-top: 1px solid var(--noir-border);
+  margin-top: 64px;
+  padding-top: 32px;
+  text-align: center;
+}
+
+.logo {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 18px;
+  letter-spacing: 4px;
+  color: var(--gris);
+}
+
+.logo .y { font-size: 22px; color: var(--blanc-muted); }
+.logo .dot { color: var(--orange); }
+
+.footer-note {
+  font-size: 11px;
+  color: var(--gris);
+  margin-top: 12px;
+  letter-spacing: 1px;
+}
+
+@media (max-width: 640px) {
+  .page { padding: 40px 24px 60px; }
+  .visages-grid { grid-template-columns: 1fr; gap: 12px; }
+  .header { padding-bottom: 24px; margin-bottom: 36px; }
+  .section { margin-bottom: 44px; }
+  .cta-section { padding: 26px 22px; }
+  .cta-buttons { flex-direction: column; }
+  .btn { width: 100%; }
+}
+
+@media print {
+  body { background: white; color: black; }
+  .page { padding: 24px; max-width: 100%; }
+  .section { page-break-inside: avoid; margin-bottom: 28px; }
+  .visage { page-break-inside: avoid; }
+  .item { page-break-inside: avoid; }
+  .cta-section { background: #FAFAFA; border: 1px solid #CCC; }
+  .section p, .item-text, .visage-text, .cta-section p { color: #222; }
+  .section-title, .item-lead, .cta-section strong { color: #000; }
+  .letter-circle { background: #E8EEF6; border-color: #5677A8; }
+  .title, .visages-note { color: #000; }
+  .subtitle { color: #555; }
+}
+</style>
+</head>
+<body>
+
+<div class="page">
+
+  <header class="header">
+    <div class="header-tag">TON ARCHÉTYPE D'ENTREPRENEUR · YNSCOACHING.</div>
+    <div class="letter-circle" aria-label="L'Opérateur">
+      <svg width="46" height="46" viewBox="0 0 46 46" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="#5677A8" stroke-width="2.4" stroke-linejoin="round">
+        <polygon points="23,8 35.99,15.5 35.99,30.5 23,38 10.01,30.5 10.01,15.5"/>
+        <circle cx="23" cy="23" r="5.5"/>
+      </svg>
+    </div>
+    <div class="title-block">
+      <div class="fiche-label">L'OPÉRATEUR</div>
+      <h1 class="title">TON MODE<br>D'<span class="orange">EMPLOI</span>.</h1>
+      <p class="subtitle">Quand l'efficacité et l'exécution mènent ton business.</p>
+    </div>
+  </header>
+
+  <section class="section">
+    <div class="section-num">01</div>
+    <h2 class="section-title">Tu es probablement un entrepreneur qui…</h2>
+    <div class="section-title-line"></div>
+    <p>Tu mènes ton business <strong>à l'efficacité avant le feeling</strong>. Une idée d'offre, une stratégie : tu veux savoir tout de suite à quoi ça sert, comment ça marche, et ce que ça rapporte concrètement.</p>
+    <p>Tu détestes perdre du temps. Les lives de 2 h qui tournent en rond, les masterminds bla-bla, les théories qui ne mènent à rien — ça t'épuise. Tu veux du concret, droit au but, même si c'est plus sec.</p>
+    <p>Tu fais confiance à ce que tu peux vérifier : les chiffres, les résultats, ce qui a déjà fait ses preuves. Tu ne crois pas aux promesses de gourou — tu crois à ce que ça produit.</p>
+    <p>Tu cherches <strong>le geste juste</strong> : pas l'offre la plus impressionnante, celle qui marche et que tu peux répéter. Quand t'as trouvé ton système, tu le fais tourner à l'infini.</p>
+  </section>
+
+  <section class="section">
+    <div class="section-num">02</div>
+    <h2 class="section-title">Comment tu fonctionnes vraiment</h2>
+    <div class="section-title-line"></div>
+    <p><span class="bold-lead">Tu apprends par la pratique méthodique.</span> Pas au feeling. Montre-moi le process, les étapes, les bons repères — et je le reproduis de façon fiable, à chaque fois. Une fois la méthode comprise, tu deviens une machine régulière.</p>
+    <p><span class="bold-lead">Tu te recharges dans la clarté et le contrôle.</span> Quand t'es vidé, ce n'est pas l'imprévu qui te relance — c'est remettre de l'ordre : trier ta compta, finir ce qui traîne, vider ta to-do. Voir « fait » te redonne de l'énergie.</p>
+    <p><span class="bold-lead">Tu décides avec ce qui est mesurable.</span> Data, taux de conversion, ROI, expérience accumulée. Pas par froideur — par fiabilité. Tu sais qu'un ressenti peut tromper, mais qu'un chiffre, lui, ne ment pas.</p>
+  </section>
+
+  <section class="section">
+    <div class="section-num">03</div>
+    <h2 class="section-title">Les 4 visages de l'Opérateur</h2>
+    <div class="section-title-line"></div>
+    <p style="margin-bottom: 24px;">Selon ta façon de te ressourcer et de mener ta boîte, tu te reconnais probablement dans un de ces quatre portraits.</p>
+    <div class="visages-grid">
+      <div class="visage">
+        <div class="visage-title">Le Tactique</div>
+        <p class="visage-text">Opérationnel, réactif, dans l'action concrète. Tu lis le terrain et tu sors la solution qui marche, ici et maintenant. Tu détestes les plans figés sur 12 mois.</p>
+      </div>
+      <div class="visage">
+        <div class="visage-title">L'Autonome</div>
+        <p class="visage-text">Précis, indépendant, dans le geste maîtrisé. Tu veux comprendre comment marche un tunnel, une pub, une automatisation — pour le faire toi-même. Pas besoin qu'on te tienne la main.</p>
+      </div>
+      <div class="visage">
+        <div class="visage-title">L'Organisateur</div>
+        <p class="visage-text">Méthodique, fiable, dans la structure. Tu pilotes, tu planifies, tu fais avancer. On compte sur toi pour livrer dans les temps.</p>
+      </div>
+      <div class="visage">
+        <div class="visage-title">Le Méticuleux</div>
+        <p class="visage-text">Discret, rigoureux, dans la durée. Tu construis ton business pas à pas, sans bruit. La qualité prime sur la vitesse, toujours.</p>
+      </div>
+    </div>
+    <p class="visages-note">Tu te reconnais dans plusieurs ? C'est normal. Ce sont des portraits indicatifs — la réalité est rarement à 100 %.</p>
+  </section>
+
+  <section class="section">
+    <div class="section-num">04</div>
+    <h2 class="section-title">Tes superpouvoirs en solo</h2>
+    <div class="section-title-line"></div>
+    <div class="item-list">
+      <div class="item">
+        <div class="item-lead">La précision.</div>
+        <p class="item-text">Tu fais bien du premier coup. Tu repères le détail qui plante un lancement — un lien mort, un prix incohérent — que les autres laissent passer.</p>
+      </div>
+      <div class="item">
+        <div class="item-lead">La fiabilité.</div>
+        <p class="item-text">Quand tu promets une livraison, tu livres. Et bien. Tes clients le savent — et te recommandent pour ça.</p>
+      </div>
+      <div class="item">
+        <div class="item-lead">L'efficacité.</div>
+        <p class="item-text">Tu vas droit à l'essentiel. Pas d'effort inutile, pas de temps perdu. Tu trouves le chemin le plus court vers le résultat.</p>
+      </div>
+      <div class="item">
+        <div class="item-lead">Le sens du concret.</div>
+        <p class="item-text">Tu transformes les idées floues en système applicable. Là où d'autres rêvent leur business, toi tu le fais tourner.</p>
+      </div>
+      <div class="item">
+        <div class="item-lead">L'exécution.</div>
+        <p class="item-text">Tu finis ce que tu commences. En solo, où 90 % abandonnent en cours de route, cette discipline est ton avantage le plus rare.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-num">05</div>
+    <h2 class="section-title">Tes pièges typiques de solopreneur</h2>
+    <div class="section-title-line"></div>
+    <div class="item-list">
+      <div class="item piege">
+        <div class="item-lead">T'enfermer dans la rigueur.</div>
+        <p class="item-text">À force de chercher LE système parfait, tu oublies qu'il sert ton chiffre — pas l'inverse. Un process trop carré peut te bloquer plus qu'il ne t'aide.</p>
+      </div>
+      <div class="item piege">
+        <div class="item-lead">Confondre efficacité et perfection.</div>
+        <p class="item-text">Tu cherches le juste, et tu glisses vers l'impossible. Une offre lancée à 90 % vaut mille fois mieux qu'une offre parfaite jamais sortie. C'est le marché qui tranche, pas ta checklist.</p>
+      </div>
+      <div class="item piege">
+        <div class="item-lead">Couper ton ressenti (et celui du client).</div>
+        <p class="item-text">Tu fais confiance aux faits — ta force. Mais à trop ignorer le ressenti, tu rates des signaux : un client pas à l'aise, une marque qui sonne faux, ta propre fatigue.</p>
+      </div>
+      <div class="item piege">
+        <div class="item-lead">Être trop exigeant avec tes partenaires.</div>
+        <p class="item-text">Ce qui est évident pour toi ne l'est pas pour tout le monde. Quand tu attends ta précision d'un prestataire ou d'un client, tu les épuises sans le voir.</p>
+      </div>
+      <div class="item piege">
+        <div class="item-lead">Refuser ce qui n'est pas prouvé.</div>
+        <p class="item-text">Tu te méfies du nouveau, du non-testé. Cette prudence te protège — mais elle peut te faire rater l'angle créatif ou l'opportunité qui demande un peu de risque.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-num">06</div>
+    <h2 class="section-title">Ton mode d'emploi pour ton business</h2>
+    <div class="section-title-line"></div>
+    <div class="item-list">
+      <div class="item conseil">
+        <div class="item-lead">Définis l'objectif avant le système.</div>
+        <p class="item-text">À quoi sert cette offre ? Comment tu mesures que c'est gagné ? Posé en amont, ça t'évite de perfectionner un truc qui ne devait pas exister.</p>
+      </div>
+      <div class="item conseil">
+        <div class="item-lead">Accepte le « suffisamment bien ».</div>
+        <p class="item-text">Tout n'a pas besoin d'être parfait. Repère ce qui mérite ta précision (l'offre, la livraison) et ce qui peut rester brut (un post, un brouillon).</p>
+      </div>
+      <div class="item conseil">
+        <div class="item-lead">Lis ton corps comme un tableau de bord.</div>
+        <p class="item-text">Fatigue, tension, irritation : c'est de la data aussi. Apprends à la lire comme tes KPIs — sinon tu fonces dans le mur en regardant les bons chiffres.</p>
+      </div>
+      <div class="item conseil">
+        <div class="item-lead">Laisse les autres être moins carrés que toi.</div>
+        <p class="item-text">Ton standard est leur effort. Garder ce décalage en tête te rend bien plus efficace avec un freelance, un assistant, un client.</p>
+      </div>
+      <div class="item conseil">
+        <div class="item-lead">Teste de l'incertain, parfois.</div>
+        <p class="item-text">Pas sur tout — juste pour garder ta capacité à sortir du cadre quand le marché le demande. Sinon ton cadre devient une cage.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-num">07</div>
+    <h2 class="section-title">Tes signaux d'alarme</h2>
+    <div class="section-title-line"></div>
+    <div class="item-list">
+      <div class="item signal">
+        <div class="item-lead">Tu n'arrives plus à arrêter de peaufiner.</div>
+        <p class="item-text">Tu reprends ta page de vente, encore, encore. Elle ne sort pas. T'es passé en mode perfectionnisme — il faut livrer, même imparfait. Le marché te dira le reste.</p>
+      </div>
+      <div class="item signal">
+        <div class="item-lead">Tu deviens cassant.</div>
+        <p class="item-text">Tu critiques, tu corriges, tu reprends tes prestataires et tes clients sur tout. T'as perdu la frontière entre exigence et rejet. Tu épuises ton réseau.</p>
+      </div>
+      <div class="item signal">
+        <div class="item-lead">Tu n'arrives plus à décrocher.</div>
+        <p class="item-text">Même au repos, tu penses à ce qui n'est pas calé, pas rangé, pas fini. T'as transformé ton business — et ta vie — en checklist. Sortir de là est urgent.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-num">08</div>
+    <h2 class="section-title">Pour aller plus loin</h2>
+    <div class="section-title-line"></div>
+    <div class="cta-section">
+      <p>Ce que tu viens de lire est une <strong>lecture indicative</strong> — basée sur l'archétype qui s'est exprimé le plus chez toi en faisant le test.</p>
+      <p>Si tu t'es reconnu à plusieurs endroits, bon signe. Si certaines choses ne collent pas du tout, c'est intéressant aussi : ta vraie façon de mener ton business combine sûrement plusieurs tendances.</p>
+      <p>Comprendre précisément comment TON business doit tourner — l'ordre exact de tes tendances, ce qui t'active, ce qui te crame, comment vendre et bosser sans jamais te trahir — c'est ce que je fais dans mes accompagnements.</p>
+      <p class="cta-final-line">Et si ça te dit, on en parle ensemble.</p>
+      <div class="cta-buttons">
+        <a class="btn btn-primary" href="https://www.instagram.com/ynscoaching/" target="_blank" rel="noopener">RÉSERVER UN ÉCHANGE →</a>
+        <a class="btn btn-secondary" href="https://www.instagram.com/ynscoaching/" target="_blank" rel="noopener">ME SUIVRE SUR INSTAGRAM</a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="logo"><span class="y">Y</span>NSCOACHING<span class="dot">.</span></div>
+    <div class="footer-note">ARCHÉTYPE ENTREPRENEUR · L'OPÉRATEUR</div>
+  </footer>
+
+</div>
+
+</body>
+</html>
